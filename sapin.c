@@ -5,10 +5,8 @@
 ** Login   <boitea_r@epitech.net>
 ** 
 ** Started on  Thu Oct  1 01:21:14 2015 Ronan Boiteau
-** Last update Thu Oct  1 03:07:14 2015 Ronan Boiteau
+** Last update Thu Oct  1 03:25:59 2015 Ronan Boiteau
 */
-
-#include <stdio.h>
 
 int	get_columns(int taille)
 {
@@ -34,6 +32,12 @@ int	get_columns(int taille)
   return (columns);
 }
 
+int	pied_put_column(int index_columns)
+{
+  my_putchar('|');
+  return (index_columns + 1);
+}
+
 void	pied(int taille, int total_max_columns)
 {
   int	max_lines;
@@ -52,61 +56,61 @@ void	pied(int taille, int total_max_columns)
       index_columns = 1;
       while (index_columns < (total_max_columns - columns + 2) / 2)
 	{
-	  my_putchar(' ');	      
+	  my_putchar(' ');
 	  index_columns = index_columns + 1;
 	}
       index_columns = 1;
       while (index_columns <= columns)
-	{
-	  my_putchar('|');
-	  index_columns = index_columns + 1;
-	}
+	index_columns = pied_put_column(index_columns);
       my_putchar('\n');
       index_lines = index_lines + 1;
     }
+}
+
+int	put_sapin(int total_max_columns, int columns, int max_columns)
+{
+  int	index_columns;
+
+  index_columns = 1;
+  while (index_columns < (total_max_columns - columns + 2) / 2)
+    {
+      my_putchar(' ');
+      index_columns = index_columns + 1;
+    }
+  index_columns = 1;
+  while (index_columns <= columns && columns <= max_columns)
+    {
+      my_putchar('*');
+      index_columns = index_columns + 1;
+    }
+  my_putchar('\n');
+  return (columns + 2);
 }
 
 void	sapin(int taille)
 {
   int	max_lines;
   int	total_max_lines;
-  int	max_columns;
-  int	total_max_columns;
   int	columns;
   int	index_lines;
-  int	index_columns;
   int	index_taille;
 
   if (taille == 0)
     return ;
   total_max_lines = taille + 3;
-  total_max_columns = get_columns(taille) + total_max_lines * 2 - 2;
   index_taille = 1;
   while (index_taille <= taille)
     {
       columns = get_columns(index_taille);
       max_lines = index_taille + 3;
-      max_columns = columns * max_lines * 2;
       index_lines = 1;
       while (index_lines <= max_lines)
 	{
-	  index_columns = 1;
-	  while (index_columns < (total_max_columns - columns + 2) / 2)
-	    {
-	      my_putchar(' ');	      
-	      index_columns = index_columns + 1;
-	    }
-	  index_columns = 1;
-	  while (index_columns <= columns && columns <= max_columns)
-	    {
-	      my_putchar('*');
-	      index_columns = index_columns + 1;
-	    }	  
-	  my_putchar('\n');
-	  columns = columns + 2;
+	  columns = put_sapin(get_columns(taille) + total_max_lines * 2 - 2,
+			      columns, columns * max_lines * 2);
 	  index_lines = index_lines + 1;
 	}
       index_taille = index_taille + 1;
     }
-  pied(taille, total_max_columns);
+  pied(taille, get_columns(taille) + total_max_lines * 2 - 2);
 }
