@@ -5,8 +5,13 @@
 ** Login   <boitea_r@epitech.net>
 ** 
 ** Started on  Thu Oct  1 01:21:14 2015 Ronan Boiteau
-** Last update Thu Oct  1 03:25:59 2015 Ronan Boiteau
+** Last update Sat Oct  3 20:27:12 2015 Ronan Boiteau
 */
+
+void	my_putchar(char c)
+{
+  write(1, &c, 1);
+}
 
 int	get_columns(int taille)
 {
@@ -32,25 +37,15 @@ int	get_columns(int taille)
   return (columns);
 }
 
-int	pied_put_column(int index_columns)
+void	pied(int taille, int total_max_columns, int max_lines, int index_lines)
 {
-  my_putchar('|');
-  return (index_columns + 1);
-}
-
-void	pied(int taille, int total_max_columns)
-{
-  int	max_lines;
   int	columns;
-  int	index_lines;
   int	index_columns;
 
-  max_lines = taille;
   if (taille % 2 == 1)
     columns = taille;
   else
     columns = taille + 1;
-  index_lines = 1;
   while (index_lines <= max_lines)
     {
       index_columns = 1;
@@ -61,7 +56,10 @@ void	pied(int taille, int total_max_columns)
 	}
       index_columns = 1;
       while (index_columns <= columns)
-	index_columns = pied_put_column(index_columns);
+	{
+	  my_putchar('|');
+	  index_columns = index_columns + 1;
+	}
       my_putchar('\n');
       index_lines = index_lines + 1;
     }
@@ -112,5 +110,5 @@ void	sapin(int taille)
 	}
       index_taille = index_taille + 1;
     }
-  pied(taille, get_columns(taille) + total_max_lines * 2 - 2);
+  pied(taille, get_columns(taille) + total_max_lines * 2 - 2, taille, 1);
 }
