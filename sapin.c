@@ -5,7 +5,7 @@
 ** Login   <boitea_r@epitech.net>
 ** 
 ** Started on  Thu Oct  1 01:21:14 2015 Ronan Boiteau
-** Last update Sun Oct  4 15:02:15 2015 Ronan Boiteau
+** Last update Sun Oct  4 21:01:47 2015 Ronan Boiteau
 */
 
 int	get_columns(int taille)
@@ -80,6 +80,17 @@ int	put_sapin(int total_max_columns, int columns, int max_columns)
   return (columns + 2);
 }
 
+void	check_errors(int taille)
+{
+  if (taille == 0)
+    return ;
+  if (taille < 0)
+    {
+      write(2, "The argument must be positive.\n", 31);
+      return ;
+    }
+}
+
 void	sapin(int taille)
 {
   int	max_lines;
@@ -88,8 +99,8 @@ void	sapin(int taille)
   int	index_lines;
   int	index_taille;
 
-  if (taille == 0)
-    return ;
+  if (taille <= 0)
+    return (check_errors(taille));
   total_max_lines = taille + 3;
   index_taille = 1;
   while (index_taille <= taille)
