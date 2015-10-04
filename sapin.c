@@ -5,13 +5,8 @@
 ** Login   <boitea_r@epitech.net>
 ** 
 ** Started on  Thu Oct  1 01:21:14 2015 Ronan Boiteau
-** Last update Sat Oct  3 20:27:12 2015 Ronan Boiteau
+** Last update Sun Oct  4 15:02:15 2015 Ronan Boiteau
 */
-
-void	my_putchar(char c)
-{
-  write(1, &c, 1);
-}
 
 int	get_columns(int taille)
 {
