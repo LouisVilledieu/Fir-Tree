@@ -1,120 +1,115 @@
-/*
-** sapin.c for sapin in /home/boitea_r
-** 
-** Made by Ronan Boiteau
-** Login   <boitea_r@epitech.net>
-** 
-** Started on  Thu Oct  1 01:21:14 2015 Ronan Boiteau
-** Last update Sun Oct  4 21:01:47 2015 Ronan Boiteau
-*/
+#include <unistd.h>
 
-int	get_columns(int taille)
+static int	get_columns(int size)
 {
-  int	index_taille;
-  int	index_lines;
-  int	max_lines;
-  int	columns;
+  int		index_size;
+  int		index_lines;
+  int		max_lines;
+  int		columns;
 
   columns = 1;
-  index_taille = 1;
-  while (index_taille < taille)
+  index_size = 1;
+  while (index_size < size)
     {
-      max_lines = index_taille + 3;
+      max_lines = index_size + 3;
       index_lines = 1;
       while (index_lines < max_lines)
 	{
 	  columns = columns + 2;
 	  index_lines = index_lines + 1;
 	}
-      index_taille = index_taille + 1;
-      columns = columns - (index_taille / 2) * 2;
+      index_size = index_size + 1;
+      columns = columns - (index_size / 2) * 2;
     }
   return (columns);
 }
 
-void	pied(int taille, int total_max_columns, int max_lines, int index_lines)
+static void	put_bottom(int size,
+			   int total_max_columns,
+			   int max_lines,
+			   int index_lines)
 {
-  int	columns;
-  int	index_columns;
+  int		columns;
+  int		index_columns;
 
-  if (taille % 2 == 1)
-    columns = taille;
+  if (size % 2 == 1)
+    columns = size;
   else
-    columns = taille + 1;
+    columns = size + 1;
   while (index_lines <= max_lines)
     {
       index_columns = 1;
       while (index_columns < (total_max_columns - columns + 2) / 2)
 	{
-	  my_putchar(' ');
+	  write(1, " ", 1);
 	  index_columns = index_columns + 1;
 	}
       index_columns = 1;
       while (index_columns <= columns)
 	{
-	  my_putchar('|');
+	  write(1, "|", 1);
 	  index_columns = index_columns + 1;
 	}
-      my_putchar('\n');
+      write(1, "\n", 1);
       index_lines = index_lines + 1;
     }
 }
 
-int	put_sapin(int total_max_columns, int columns, int max_columns)
+static int	put_tree(int total_max_columns, int columns, int max_columns)
 {
-  int	index_columns;
+  int		index_columns;
 
   index_columns = 1;
   while (index_columns < (total_max_columns - columns + 2) / 2)
     {
-      my_putchar(' ');
+      write(1, " ", 1);
       index_columns = index_columns + 1;
     }
   index_columns = 1;
   while (index_columns <= columns && columns <= max_columns)
     {
-      my_putchar('*');
+      write(1, "*", 1);
       index_columns = index_columns + 1;
     }
-  my_putchar('\n');
+  write(1, "\n", 1);
   return (columns + 2);
 }
 
-void	check_errors(int taille)
+static void	check_errors(int size)
 {
-  if (taille == 0)
+  if (size == 0)
     return ;
-  if (taille < 0)
+  if (size < 0)
     {
       write(2, "The argument must be positive.\n", 31);
       return ;
     }
 }
 
-void	sapin(int taille)
+void	tree(int size)
 {
   int	max_lines;
   int	total_max_lines;
   int	columns;
   int	index_lines;
-  int	index_taille;
+  int	index_size;
 
-  if (taille <= 0)
-    return (check_errors(taille));
-  total_max_lines = taille + 3;
-  index_taille = 1;
-  while (index_taille <= taille)
+  if (size <= 0)
+    return (check_errors(size));
+  total_max_lines = size + 3;
+  index_size = 1;
+  while (index_size <= size)
     {
-      columns = get_columns(index_taille);
-      max_lines = index_taille + 3;
+      columns = get_columns(index_size);
+      max_lines = index_size + 3;
       index_lines = 1;
       while (index_lines <= max_lines)
 	{
-	  columns = put_sapin(get_columns(taille) + total_max_lines * 2 - 2,
-			      columns, columns * max_lines * 2);
+	  columns = put_tree(get_columns(size) + total_max_lines * 2 - 2,
+			     columns, columns * max_lines * 2);
 	  index_lines = index_lines + 1;
 	}
-      index_taille = index_taille + 1;
+      index_size = index_size + 1;
     }
-  pied(taille, get_columns(taille) + total_max_lines * 2 - 2, taille, 1);
+  put_bottom(size, get_columns(size) + total_max_lines * 2 - 2, size, 1);
 }
