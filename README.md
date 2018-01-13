@@ -4,7 +4,7 @@
 
 An ASCII art resizable fir tree generator in C.
 
-<img alt="Fir tree" src="https://i.imgur.com/Gd8bdiK.png" width="100" height="100"/>
+<img alt="Fir tree" src="https://i.imgur.com/Gd8bdiK.png" width="130" height="130"/>
 
 ## Requirements
 
