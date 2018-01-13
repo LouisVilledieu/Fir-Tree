@@ -31,7 +31,7 @@ Run the executable file you just compiled to print out your fir tree:
 
 Edit the `main.c` file with your favorite editor:
 
-```c_cpp
+```cpp
 void	tree(int size);
 
 int	main(void)
