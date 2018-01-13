@@ -1,19 +1,30 @@
-# Fir-Tree
+# Fir Tree
 
 {EPITECH.} first year project.
 
-An ASCII art resizable fir tree in C.
+An ASCII art resizable fir tree generator in C.
+
+<img alt="Fir tree" src="https://i.imgur.com/Gd8bdiK.png" width="100" height="100"/>
 
 ## Requirements
 
  - [GCC](https://gcc.gnu.org/)
 
-## Compilation
+## Get started
+
+### Compilation
 
 Navigate to the root of the repository from your Terminal and run the following command to build the `tree` executable file:
 
 ```
 gcc main.c tree.c -o tree
+```
+
+### Running Fir Tree
+
+Run the executable file you just compiled to print out your fir tree:
+```
+./tree
 ```
 
 ## How to choose my tree's size?
